@@ -136,7 +136,7 @@
                   class="btn btn-info btn-lg"
                   onclick="showRecords(this)"
                 >
-                  View  info
+                  View info
                 </button>
               </div>
               <pre id="records" style="margin-top: 20px"></pre>
@@ -147,12 +147,12 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="text-center">Share your  Patent</h3>
+          <h3 class="text-center">Share your Patent</h3>
         </div>
         <div class="panel-body">
           <div class="row">
             <div class="alert alert-info col-sm-8 col-sm-offset-2">
-              <strong>Info!</strong> The team  already has access to your
+              <strong>Info!</strong> The team already has access to your
               records. Revoke access or wait for time duration to end to
               continue.
             </div>
@@ -234,52 +234,52 @@
 
         $("#buyInsurance").hide();
         $("#insuranceInfo").hide();
-        setTimeout(()=>{
-        // print patient details and insurer details (if exists). If insurer does not exist show the buy insurance panel
-        console.log("Getting Patient Data");
-        contractInstance.get_patient.call(
-          key,
-          { gas: 1000000 },
-          function (error, result) {
-            console.log("Patient Data Result:" + result);
-            if (!error) {
-              console.log(result);
-              a = result[0];
-              b = result[1];
-              ailments = result[2];
-              insurerAddress = result[3];
-              recordHash = result[4];
-              $("#name").html(a);
-              $("#id").html(b.c[0]);
-              $("#recordsHash").html(recordHash);
+        setTimeout(() => {
+          // print patient details and insurer details (if exists). If insurer does not exist show the buy insurance panel
+          console.log("Getting Patient Data");
+          contractInstance.get_patient.call(
+            key,
+            { gas: 1000000 },
+            function (error, result) {
+              console.log("Patient Data Result:" + result);
+              if (!error) {
+                console.log(result);
+                a = result[0];
+                b = result[1];
+                ailments = result[2];
+                insurerAddress = result[3];
+                recordHash = result[4];
+                $("#name").html(a);
+                $("#id").html(b.c[0]);
+                $("#recordsHash").html(recordHash);
 
-              if (insurerAddress != 0) {
-                $("#buyInsurance").hide();
-              } else {
-                var InsurerList = 0;
+                if (insurerAddress != 0) {
+                  $("#buyInsurance").hide();
+                } else {
+                  var InsurerList = 0;
 
-                contractInstance.get_insurer_list(
-                  { gas: 1000000 },
-                  function (error, result) {
-                    if (!error) {
-                      InsurerList = result;
-                      var list = document.getElementById("insurers");
-                      for (var i = 0; i < InsurerList.length; i++) {
-                        contractInstance.get_insurer.call(
-                          InsurerList[i],
-                          { gas: 1000000 },
-                          function (error, result) {
-                            if (!error) {
-                              d = result[0];
+                  contractInstance.get_insurer_list(
+                    { gas: 1000000 },
+                    function (error, result) {
+                      if (!error) {
+                        InsurerList = result;
+                        var list = document.getElementById("insurers");
+                        for (var i = 0; i < InsurerList.length; i++) {
+                          contractInstance.get_insurer.call(
+                            InsurerList[i],
+                            { gas: 1000000 },
+                            function (error, result) {
+                              if (!error) {
+                                d = result[0];
 
-                              var option = document.createElement("option");
-                              option.text = d;
+                                var option = document.createElement("option");
+                                option.text = d;
 
-                              list.add(option);
-                            } else {
-                              console.log(error);
+                                list.add(option);
+                              } else {
+                                console.log(error);
+                              }
                             }
-                          }
                           );
                         }
                       }
@@ -370,12 +370,12 @@
 
           toggleRecordsButton += 1;
 
-          element.innerHTML = "Hide Medical Records";
+          element.innerHTML = "Hide Records";
           element.className = "btn btn-info btn-lg";
         } else {
           $("#records").hide();
           toggleRecordsButton -= 1;
-          element.innerHTML = "View Medical Records";
+          element.innerHTML = "View Records";
           element.className = "btn btn-info btn-lg";
         }
       }
