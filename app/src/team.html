@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>SwasthyaChain</title>
+    <title>QChain</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -60,7 +60,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SwasthyaChain</a>
+          <a class="navbar-brand" href="#">QChain</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -78,19 +78,19 @@
     <div class="container">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="text-center">Personal Information</h3>
+          <h3 class="text-center">Team Information</h3>
         </div>
         <div class="panel-body">
           <div class="row">
             <div class="col-sm-offset-1 col-sm-10">
               <table class="table">
                 <tr>
-                  <th>Name:</th>
+                  <th>Team Name:</th>
                   <td id="name"></td>
                 </tr>
                 <tr>
-                  <th>Age:</th>
-                  <td id="age"></td>
+                  <th>Dept Id:</th>
+                  <td id="id"></td>
                 </tr>
               </table>
             </div>
@@ -100,7 +100,7 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="text-center">Accessible EMRs</h3>
+          <h3 class="text-center">Accessible Patents</h3>
         </div>
         <div class="panel-body">
           <div class="row">
@@ -113,7 +113,7 @@
             <div class="col-sm-offset-1 col-sm-10">
               <table id="viewPatient" class="table table-hover">
                 <tr>
-                  <th>Patient</th>
+                  <th>Patent</th>
                   <th class="publicKeyPatient">Public Key</th>
                   <th>Action</th>
                 </tr>
@@ -140,13 +140,10 @@
       const Buffer = window.IpfsApi().Buffer;
 
       var ailmentsDict = {};
-      ailmentsDict[0] = "Common Flu";
-      ailmentsDict[1] = "Viral Infection";
-      ailmentsDict[2] = "Cancer";
-      ailmentsDict[3] = "Tumor";
-      ailmentsDict[4] = "Covid-19";
-      ailmentsDict[5] = "Heart-Disorder";
-      ailmentsDict[6] = "Other";
+      ailmentsDict[0] = "Accept";
+      ailmentsDict[1] = "Reject";
+      ailmentsDict[2] = "Re-Review";
+      ailmentsDict[3] = "Cancel";
       var url_string = window.location.href;
       var url = new URL(url_string);
       var key;
@@ -172,7 +169,7 @@
                 b = result[1];
                 docName = a;
                 $("#name").html(a);
-                $("#age").html(b.c[0]);
+                $("#id").html(b.c[0]);
               } else console.error(error);
             }
           );
@@ -244,17 +241,14 @@
                                         <div class="row">
                                             <div class="form-group col-sm-10">
                                                 <div class="row">
-                                                    <div class="col-sm-2"><label for="ailmentsList" class="control-label">Diagnosis:</label></div>
+                                                    <div class="col-sm-2"><label for="ailmentsList" class="control-label">Status:</label></div>
                                                     <div class="col-sm-10">
                                                         <select class="form-control" id="ailmentsList${patientAddress}" style="width:inherit;" required>
                                                             <option selected disabled>-- Please Select --</option>
-                                                            <option value = "0">Common Flu</option>
-                                                            <option value = "1">Viral Infection</option>
-                                                            <option value = "2">Cancer</option>
-                                                            <option value = "3">Tumor</option>
-                                                            <option value = "4">Covid-19</option>
-                                                            <option value = "5">Heart-Disorder</option>
-                                                            <option value = "6">Other</option>
+                                                            <option value = "0">Accept</option>
+                                                            <option value = "1">Reject</option>
+                                                            <option value = "2">Re-Review</option>
+                                                            <option value = "3">Cancel</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -264,7 +258,7 @@
                                             <div class="form-group col-sm-10">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <label class="control-label" for="details">Details:</label>
+                                                        <label class="control-label" for="details">Comments:</label>
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <textarea class="form-control" rows="5" id="details" placeholder="Enter details to be added" name = "Details" style="width: inherit" required autofocus></textarea>
@@ -336,9 +330,9 @@
 
         var oldRecords = $("#records" + patientAddress).html();
 
-        var newRecords = `Diagnosed By : ${docName}
-Diagnosis Time : ${getDateTime()}
-Diagnosis : ${diagnosed}
+        var newRecords = `Reviewd By : ${docName}
+Review Time : ${getDateTime()}
+status : ${diagnosed}
 Comments : ${comments}
 
         
@@ -361,7 +355,7 @@ Comments : ${comments}
                 { gas: 1000000 },
                 function (error, result) {
                   if (!error) {
-                    alert("Your diagnosis has been submitted.");
+                    alert("Your review has been submitted.");
                     // delete content row
                     table.deleteRow(index + 1);
 
@@ -376,7 +370,7 @@ Comments : ${comments}
             }
           });
         } else {
-          alert("Select a diagnosis");
+          alert("Select a status");
         }
       }
     </script>

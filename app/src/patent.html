@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>SwasthyaChain</title>
+    <title>QChain</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -90,7 +90,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SwasthyaChain</a>
+          <a class="navbar-brand" href="#">QChain</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -108,19 +108,19 @@
     <div class="container">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="text-center">Personal Information</h3>
+          <h3 class="text-center">Patent Information</h3>
         </div>
         <div class="panel-body">
           <div class="row">
             <div class="col-sm-offset-1 col-sm-10">
               <table class="table">
                 <tr>
-                  <th>Name:</th>
+                  <th>Patent Name:</th>
                   <td id="name"></td>
                 </tr>
                 <tr>
-                  <th>Age:</th>
-                  <td id="age"></td>
+                  <th>Patent id:</th>
+                  <td id="id"></td>
                 </tr>
               </table>
 
@@ -135,7 +135,7 @@
                   class="btn btn-info btn-lg"
                   onclick="showRecords(this)"
                 >
-                  View medical records
+                  View  info
                 </button>
               </div>
               <pre id="records" style="margin-top: 20px"></pre>
@@ -146,12 +146,12 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="text-center">Share your Medical Record</h3>
+          <h3 class="text-center">Share your  Patent</h3>
         </div>
         <div class="panel-body">
           <div class="row">
             <div class="alert alert-info col-sm-8 col-sm-offset-2">
-              <strong>Info!</strong> The doctor already has access to your
+              <strong>Info!</strong> The team  already has access to your
               records. Revoke access or wait for time duration to end to
               continue.
             </div>
@@ -160,7 +160,7 @@
           <form class="form-horizontal" action="/action_page.php">
             <div class="form-group">
               <label for="permitDoctorList" class="control-label col-sm-2"
-                >Doctor:</label
+                >Team:</label
               >
               <div class="col-sm-8">
                 <select class="form-control" id="permitDoctorList">
@@ -179,7 +179,7 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="text-center">Current EMR access holders</h3>
+          <h3 class="text-center">Current Patent access holders</h3>
         </div>
         <div class="panel-body">
           <div class="row">
@@ -192,7 +192,7 @@
             <div class="col-sm-offset-1 col-sm-10">
               <table id="accessDoc" class="table table-hover">
                 <tr>
-                  <th>Doctor</th>
+                  <th>Team</th>
                   <th class="publicKeyDoctor">Public Key</th>
                   <th>Revoke access</th>
                 </tr>
@@ -249,7 +249,7 @@
               insurerAddress = result[3];
               recordHash = result[4];
               $("#name").html(a);
-              $("#age").html(b.c[0]);
+              $("#id").html(b.c[0]);
               $("#recordsHash").html(recordHash);
 
               if (insurerAddress != 0) {
