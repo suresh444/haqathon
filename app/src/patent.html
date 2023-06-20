@@ -233,7 +233,7 @@
 
         $("#buyInsurance").hide();
         $("#insuranceInfo").hide();
-
+        setTimeout(()=>{
         // print patient details and insurer details (if exists). If insurer does not exist show the buy insurance panel
         console.log("Getting Patient Data");
         contractInstance.get_patient.call(
@@ -279,18 +279,19 @@
                               console.log(error);
                             }
                           }
-                        );
+                          );
+                        }
                       }
                     }
-                  }
-                );
-                $("#buyInsurance").show();
+                  );
+                  $("#buyInsurance").show();
 
-                $("#insuranceInfo").hide();
-              }
-            } else console.error(error);
-          }
-        );
+                  $("#insuranceInfo").hide();
+                }
+              } else console.error(error);
+            }
+          );
+        }, 0);
 
         // print out the doctors to share emr
         var DoctorList = 0;
