@@ -218,21 +218,21 @@
       function showRecords(element) {
         var table = document.getElementById("viewPatient");
         var index = element.parentNode.parentNode.rowIndex;
-        var patientAddress = table.rows[index].cells[0].innerHTML;
+        var patientAddress = table.rows[index].cells[1].innerHTML;
         console.log(patientAddress);
         if (toggleRecordsButton % 2 == 0) {
           var patientRecord = "";
-
           contractInstance.get_hash(
             patientAddress,
             { gas: 1000000 },
             function (error, result) {
               if (!error) {
                 $.get("http://localhost:8080/ipfs/" + result, function (data) {
-                  patientRecord = data;
+                  setTimeout(() => {
+                    patientRecord = data;
 
-                  content =
-                    `<div class="tab-content">
+                    content =
+                      `<div class="tab-content">
                         <div id="view${patientAddress}">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -274,14 +274,15 @@
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <button class="btn btn-primary" onclick = "submitDiagnosis(this,` +
-                    index +
-                    `)">Submit</button>
+                      index +
+                      `)">Submit</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>     
                             </div>
                         </div>`;
+                  }, 0);
 
                   var row1 = table.insertRow(index + 1);
                   var cell1 = row1.insertCell(0);
@@ -326,7 +327,7 @@
 
       function submitDiagnosis(element, index) {
         var table = document.getElementById("viewPatient");
-        var patientAddress = table.rows[index].cells[0].innerHTML;
+        var patientAddress = table.rows[index].cells[1].innerHTML;
 
         console.log(patientAddress);
         var diagnosis = $("#ailmentsList" + patientAddress).val();

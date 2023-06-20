@@ -173,16 +173,13 @@
         contractInstance.get_patient_list(
           { gas: 1000000 },
           function (error, result) {
-            setTimeout(() => {}, 2000);
             if (!error) PatientList = result;
             else console.error(error);
           }
         );
-        setTimeout(() => {}, 2000);
         contractInstance.get_doctor_list(
           { gas: 1000000 },
           function (error, result) {
-            setTimeout(() => {}, 2000);
             if (!error) DoctorList = result;
             else console.error(error);
           }
